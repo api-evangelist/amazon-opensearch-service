@@ -1,0 +1,136 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "opensearch": "https://docs.aws.amazon.com/opensearch-service/latest/APIReference/",
+    "aws": "https://aws.amazon.com/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Domain": {
+      "@id": "opensearch:API_DescribeDomain",
+      "@context": {
+        "DomainId": {
+          "@id": "schema:identifier",
+          "@type": "xsd:string"
+        },
+        "DomainName": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "ARN": {
+          "@id": "opensearch:domainArn",
+          "@type": "xsd:string"
+        },
+        "Created": {
+          "@id": "opensearch:created",
+          "@type": "xsd:boolean"
+        },
+        "Deleted": {
+          "@id": "opensearch:deleted",
+          "@type": "xsd:boolean"
+        },
+        "Endpoint": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "EngineVersion": {
+          "@id": "schema:version",
+          "@type": "xsd:string"
+        },
+        "ClusterConfig": {
+          "@id": "opensearch:clusterConfig",
+          "@type": "opensearch:ClusterConfig"
+        },
+        "EBSOptions": {
+          "@id": "opensearch:ebsOptions",
+          "@type": "opensearch:EBSOptions"
+        },
+        "AccessPolicies": {
+          "@id": "opensearch:accessPolicies",
+          "@type": "xsd:string"
+        },
+        "EncryptionAtRestOptions": {
+          "@id": "opensearch:encryptionAtRest",
+          "@type": "opensearch:EncryptionAtRestOptions"
+        },
+        "NodeToNodeEncryptionOptions": {
+          "@id": "opensearch:nodeToNodeEncryption",
+          "@type": "opensearch:NodeToNodeEncryptionOptions"
+        },
+        "tags": {
+          "@id": "schema:keywords",
+          "@container": "@list"
+        }
+      }
+    },
+
+    "ClusterConfig": {
+      "@id": "opensearch:ClusterConfig",
+      "@context": {
+        "InstanceType": {
+          "@id": "opensearch:instanceType",
+          "@type": "xsd:string"
+        },
+        "InstanceCount": {
+          "@id": "opensearch:instanceCount",
+          "@type": "xsd:integer"
+        },
+        "DedicatedMasterEnabled": {
+          "@id": "opensearch:dedicatedMasterEnabled",
+          "@type": "xsd:boolean"
+        },
+        "DedicatedMasterType": {
+          "@id": "opensearch:dedicatedMasterType",
+          "@type": "xsd:string"
+        },
+        "DedicatedMasterCount": {
+          "@id": "opensearch:dedicatedMasterCount",
+          "@type": "xsd:integer"
+        },
+        "ZoneAwarenessEnabled": {
+          "@id": "opensearch:zoneAwarenessEnabled",
+          "@type": "xsd:boolean"
+        },
+        "WarmEnabled": {
+          "@id": "opensearch:warmEnabled",
+          "@type": "xsd:boolean"
+        },
+        "WarmType": {
+          "@id": "opensearch:warmType",
+          "@type": "xsd:string"
+        },
+        "WarmCount": {
+          "@id": "opensearch:warmCount",
+          "@type": "xsd:integer"
+        }
+      }
+    },
+
+    "EBSOptions": {
+      "@id": "opensearch:EBSOptions",
+      "@context": {
+        "EBSEnabled": {
+          "@id": "opensearch:ebsEnabled",
+          "@type": "xsd:boolean"
+        },
+        "VolumeType": {
+          "@id": "opensearch:volumeType",
+          "@type": "xsd:string"
+        },
+        "VolumeSize": {
+          "@id": "opensearch:volumeSize",
+          "@type": "xsd:integer"
+        },
+        "Iops": {
+          "@id": "opensearch:iops",
+          "@type": "xsd:integer"
+        },
+        "Throughput": {
+          "@id": "opensearch:throughput",
+          "@type": "xsd:integer"
+        }
+      }
+    }
+  }
+}

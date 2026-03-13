@@ -1,0 +1,183 @@
+openapi: 3.1.0
+info:
+  title: Amazon OpenSearch Service API
+  description: >-
+    The Amazon OpenSearch Service API enables programmatic management of
+    OpenSearch domains. You can create, configure, update, and delete
+    domains, manage access policies, configure VPC endpoints, and monitor
+    domain health through this management interface.
+  version: '2021-01-01'
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+servers:
+  - url: https://es.{region}.amazonaws.com
+    description: Amazon OpenSearch Service regional endpoint
+    variables:
+      region:
+        default: us-east-1
+        description: AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-south-1
+          - sa-east-1
+          - ca-central-1
+security:
+  - sigv4: []
+tags:
+  - name: Domains
+    description: Operations for creating and managing OpenSearch domains
+  - name: Configuration
+    description: Operations for domain configuration and settings
+  - name: Packages
+    description: Operations for managing custom packages
+  - name: Upgrades
+    description: Operations for upgrading OpenSearch versions
+paths:
+  /2021-01-01/opensearch/domain:
+    post:
+      operationId: CreateDomain
+      summary: Create an OpenSearch domain
+      description: Creates an Amazon OpenSearch Service domain with the specified configuration.
+      tags:
+        - Domains
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDomainRequest'
+      responses:
+        '200':
+          description: Domain creation initiated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainStatus'
+  /2021-01-01/opensearch/domain/{domainName}:
+    get:
+      operationId: DescribeDomain
+      summary: Describe an OpenSearch domain
+      description: Returns domain configuration details for the specified domain.
+      tags:
+        - Domains
+      parameters:
+        - name: domainName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Domain details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DomainStatus'
+    delete:
+      operationId: DeleteDomain
+      summary: Delete an OpenSearch domain
+      description: Permanently deletes the specified domain and all of its data.
+      tags:
+        - Domains
+      parameters:
+        - name: domainName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Domain deletion initiated successfully
+  /2021-01-01/opensearch/domain-info:
+    post:
+      operationId: DescribeDomains
+      summary: Describe multiple OpenSearch domains
+      description: Returns domain configuration details for the specified list of domains.
+      tags:
+        - Domains
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                DomainNames:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: Domain details retrieved successfully
+  /2021-01-01/opensearch/domains:
+    get:
+      operationId: ListDomainNames
+      summary: List all OpenSearch domains
+      description: Returns the names of all OpenSearch domains owned by the current user.
+      tags:
+        - Domains
+      responses:
+        '200':
+          description: Domain names listed successfully
+components:
+  securitySchemes:
+    sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4
+  schemas:
+    CreateDomainRequest:
+      type: object
+      required:
+        - DomainName
+      properties:
+        DomainName:
+          type: string
+          description: Name of the OpenSearch domain to create
+        EngineVersion:
+          type: string
+          description: Version of OpenSearch or Elasticsearch
+        ClusterConfig:
+          type: object
+          description: Container for the cluster configuration
+        EBSOptions:
+          type: object
+          description: Container for EBS-based storage options
+        AccessPolicies:
+          type: string
+          description: IAM access policy as a JSON-formatted string
+    DomainStatus:
+      type: object
+      properties:
+        DomainId:
+          type: string
+        DomainName:
+          type: string
+        ARN:
+          type: string
+        Created:
+          type: boolean
+        Deleted:
+          type: boolean
+        Endpoint:
+          type: string
+        EngineVersion:
+          type: string
