@@ -12,7 +12,7 @@ tags:
 - Full-Text Search
 - AWS
 created: '2024-01-15'
-modified: '2026-03-13'
+modified: '2026-03-16'
 apis:
 - name: Amazon OpenSearch Service API
   description: The Amazon OpenSearch Service API enables you to create, configure, and manage OpenSearch domains for search and analytics workloads.
