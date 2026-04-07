@@ -53,7 +53,7 @@ paths:
   /2021-01-01/opensearch/domain:
     post:
       operationId: CreateDomain
-      summary: Create an OpenSearch domain
+      summary: Amazon OpenSearch Service Create an OpenSearch domain
       description: Creates an Amazon OpenSearch Service domain with the specified configuration.
       tags:
         - Domains
@@ -73,7 +73,7 @@ paths:
   /2021-01-01/opensearch/domain/{domainName}:
     get:
       operationId: DescribeDomain
-      summary: Describe an OpenSearch domain
+      summary: Amazon OpenSearch Service Describe an OpenSearch domain
       description: Returns domain configuration details for the specified domain.
       tags:
         - Domains
@@ -92,7 +92,7 @@ paths:
                 $ref: '#/components/schemas/DomainStatus'
     delete:
       operationId: DeleteDomain
-      summary: Delete an OpenSearch domain
+      summary: Amazon OpenSearch Service Delete an OpenSearch domain
       description: Permanently deletes the specified domain and all of its data.
       tags:
         - Domains
@@ -108,7 +108,7 @@ paths:
   /2021-01-01/opensearch/domain-info:
     post:
       operationId: DescribeDomains
-      summary: Describe multiple OpenSearch domains
+      summary: Amazon OpenSearch Service Describe multiple OpenSearch domains
       description: Returns domain configuration details for the specified list of domains.
       tags:
         - Domains
@@ -129,7 +129,7 @@ paths:
   /2021-01-01/opensearch/domains:
     get:
       operationId: ListDomainNames
-      summary: List all OpenSearch domains
+      summary: Amazon OpenSearch Service List all OpenSearch domains
       description: Returns the names of all OpenSearch domains owned by the current user.
       tags:
         - Domains
