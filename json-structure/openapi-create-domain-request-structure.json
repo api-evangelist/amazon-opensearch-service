@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-opensearch-service/refs/heads/main/json-structure/openapi-create-domain-request-structure.json",
+  "name": "CreateDomainRequest",
+  "description": "CreateDomainRequest schema from Amazon OpenSearch Service",
+  "type": "object",
+  "properties": {
+    "DomainName": {
+      "type": "string",
+      "description": "Name of the OpenSearch domain to create"
+    },
+    "EngineVersion": {
+      "type": "string",
+      "description": "Version of OpenSearch or Elasticsearch"
+    },
+    "ClusterConfig": {
+      "type": "object",
+      "description": "Container for the cluster configuration"
+    },
+    "EBSOptions": {
+      "type": "object",
+      "description": "Container for EBS-based storage options"
+    },
+    "AccessPolicies": {
+      "type": "string",
+      "description": "IAM access policy as a JSON-formatted string"
+    }
+  },
+  "required": [
+    "DomainName"
+  ]
+}

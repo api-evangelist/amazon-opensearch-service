@@ -16,41 +16,41 @@ info:
   x-logo:
     url: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
 servers:
-  - url: https://es.{region}.amazonaws.com
-    description: Amazon OpenSearch Service regional endpoint
-    variables:
-      region:
-        default: us-east-1
-        description: AWS region
-        enum:
-          - us-east-1
-          - us-east-2
-          - us-west-1
-          - us-west-2
-          - eu-west-1
-          - eu-west-2
-          - eu-west-3
-          - eu-central-1
-          - ap-northeast-1
-          - ap-northeast-2
-          - ap-southeast-1
-          - ap-southeast-2
-          - ap-south-1
-          - sa-east-1
-          - ca-central-1
+- url: https://es.{region}.amazonaws.com
+  description: Amazon OpenSearch Service regional endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-south-1
+      - sa-east-1
+      - ca-central-1
 security:
-  - sigv4: []
+- sigv4: []
 tags:
-  - name: Domains
-    description: Operations for creating and managing OpenSearch domains
+- name: Domains
+  description: Operations for creating and managing OpenSearch domains
 paths:
   /2021-01-01/opensearch/domain:
     post:
       operationId: CreateDomain
-      summary: Amazon OpenSearch Service Create an OpenSearch domain
+      summary: Amazon OpenSearch Service Create an OpenSearch Domain
       description: Creates an Amazon OpenSearch Service domain with the specified configuration.
       tags:
-        - Domains
+      - Domains
       requestBody:
         required: true
         content:
@@ -64,19 +64,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DomainStatus'
+              examples:
+                CreateDomain200Example:
+                  summary: Default CreateDomain 200 response
+                  x-microcks-default: true
+                  value:
+                    DomainId: resource-abc123
+                    DomainName: my-resource
+                    ARN: arn:aws:service:us-east-1:123456789012:resource/example
+                    Created: true
+                    Deleted: true
+                    Endpoint: example-string
+                    EngineVersion: 1.0.0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /2021-01-01/opensearch/domain/{domainName}:
     get:
       operationId: DescribeDomain
-      summary: Amazon OpenSearch Service Describe an OpenSearch domain
+      summary: Amazon OpenSearch Service Describe an OpenSearch Domain
       description: Returns domain configuration details for the specified domain.
       tags:
-        - Domains
+      - Domains
       parameters:
-        - name: domainName
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: domainName
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: Domain details retrieved successfully
@@ -84,28 +99,46 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DomainStatus'
+              examples:
+                DescribeDomain200Example:
+                  summary: Default DescribeDomain 200 response
+                  x-microcks-default: true
+                  value:
+                    DomainId: resource-abc123
+                    DomainName: my-resource
+                    ARN: arn:aws:service:us-east-1:123456789012:resource/example
+                    Created: true
+                    Deleted: true
+                    Endpoint: example-string
+                    EngineVersion: 1.0.0
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: DeleteDomain
-      summary: Amazon OpenSearch Service Delete an OpenSearch domain
+      summary: Amazon OpenSearch Service Delete an OpenSearch Domain
       description: Permanently deletes the specified domain and all of its data.
       tags:
-        - Domains
+      - Domains
       parameters:
-        - name: domainName
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: domainName
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '200':
           description: Domain deletion initiated successfully
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /2021-01-01/opensearch/domain-info:
     post:
       operationId: DescribeDomains
-      summary: Amazon OpenSearch Service Describe multiple OpenSearch domains
+      summary: Amazon OpenSearch Service Describe Multiple OpenSearch Domains
       description: Returns domain configuration details for the specified list of domains.
       tags:
-        - Domains
+      - Domains
       requestBody:
         required: true
         content:
@@ -120,16 +153,22 @@ paths:
       responses:
         '200':
           description: Domain details retrieved successfully
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /2021-01-01/opensearch/domains:
     get:
       operationId: ListDomainNames
-      summary: Amazon OpenSearch Service List all OpenSearch domains
+      summary: Amazon OpenSearch Service List All OpenSearch Domains
       description: Returns the names of all OpenSearch domains owned by the current user.
       tags:
-        - Domains
+      - Domains
       responses:
         '200':
           description: Domain names listed successfully
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     sigv4:
@@ -141,7 +180,7 @@ components:
     CreateDomainRequest:
       type: object
       required:
-        - DomainName
+      - DomainName
       properties:
         DomainName:
           type: string

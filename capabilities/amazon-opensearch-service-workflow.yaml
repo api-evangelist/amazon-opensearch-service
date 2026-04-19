@@ -1,0 +1,49 @@
+naftiko: 1.0.0-alpha1
+info:
+  label: Amazon OpenSearch Service API Workflow
+  description: Workflow capability composing Amazon OpenSearch Service APIs for developers and operators.
+  tags:
+  - Amazon OpenSearch Service
+  - AWS
+  created: '2026-04-19'
+  modified: '2026-04-19'
+binds:
+- namespace: env
+  keys:
+    AWS_SIGV4_AUTH: AWS_SIGV4_AUTH
+capability:
+  consumes:
+  - import: opensearch_service
+    location: ./shared/opensearch-service.yaml
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: amazon-opensearch-service-api
+    description: Unified REST API for Amazon OpenSearch Service.
+    resources:
+    - path: /v1/resources
+      name: resources
+      description: Primary Amazon OpenSearch Service resources
+      operations:
+      - method: GET
+        name: list-resources
+        description: List Amazon OpenSearch Service resources
+        call: openapi.yml.list
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: amazon-opensearch-service-mcp
+    transport: http
+    description: MCP server for AI-assisted Amazon OpenSearch Service operations.
+    tools:
+    - name: list-openapi.yml
+      description: List and manage openapi.yml resources
+      hints:
+        readOnly: true
+        openWorld: true
+      call: openapi.yml.list
+      outputParameters:
+      - type: object
+        mapping: $.

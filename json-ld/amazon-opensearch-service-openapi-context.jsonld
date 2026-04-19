@@ -1,0 +1,51 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "opensearch": "https://opensearch.amazonaws.com/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "CreateDomainRequest": "opensearch:CreateDomainRequest",
+    "DomainStatus": "opensearch:DomainStatus",
+    "ARN": {
+      "@id": "opensearch:ARN",
+      "@type": "xsd:string"
+    },
+    "AccessPolicies": {
+      "@id": "opensearch:AccessPolicies",
+      "@type": "xsd:string"
+    },
+    "ClusterConfig": {
+      "@id": "opensearch:ClusterConfig",
+      "@type": "@id"
+    },
+    "Created": {
+      "@id": "opensearch:Created",
+      "@type": "xsd:boolean"
+    },
+    "Deleted": {
+      "@id": "opensearch:Deleted",
+      "@type": "xsd:boolean"
+    },
+    "DomainId": {
+      "@id": "opensearch:DomainId",
+      "@type": "xsd:string"
+    },
+    "DomainName": {
+      "@id": "opensearch:DomainName",
+      "@type": "xsd:string"
+    },
+    "EBSOptions": {
+      "@id": "opensearch:EBSOptions",
+      "@type": "@id"
+    },
+    "Endpoint": {
+      "@id": "opensearch:Endpoint",
+      "@type": "xsd:string"
+    },
+    "EngineVersion": {
+      "@id": "opensearch:EngineVersion",
+      "@type": "xsd:string"
+    }
+  }
+}

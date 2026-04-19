@@ -1,0 +1,9 @@
+{
+  "DomainId": "resource-abc123",
+  "DomainName": "my-resource",
+  "ARN": "arn:aws:service:us-east-1:123456789012:resource/example",
+  "Created": true,
+  "Deleted": true,
+  "Endpoint": "example-string",
+  "EngineVersion": "1.0.0"
+}

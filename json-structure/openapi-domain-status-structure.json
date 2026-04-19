@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amazon-opensearch-service/refs/heads/main/json-structure/openapi-domain-status-structure.json",
+  "name": "DomainStatus",
+  "description": "DomainStatus schema from Amazon OpenSearch Service",
+  "type": "object",
+  "properties": {
+    "DomainId": {
+      "type": "string"
+    },
+    "DomainName": {
+      "type": "string"
+    },
+    "ARN": {
+      "type": "string"
+    },
+    "Created": {
+      "type": "boolean"
+    },
+    "Deleted": {
+      "type": "boolean"
+    },
+    "Endpoint": {
+      "type": "string"
+    },
+    "EngineVersion": {
+      "type": "string"
+    }
+  }
+}

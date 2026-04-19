@@ -1,0 +1,7 @@
+{
+  "DomainName": "my-resource",
+  "EngineVersion": "1.0.0",
+  "ClusterConfig": {},
+  "EBSOptions": {},
+  "AccessPolicies": "example-string"
+}
