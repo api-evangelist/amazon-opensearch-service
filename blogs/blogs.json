@@ -1,0 +1,13 @@
+{
+  "repo": "amazon-opensearch-service",
+  "feeds": [
+    {
+      "source": "https://aws.amazon.com/blogs/big-data/category/analytics/amazon-opensearch-service/",
+      "feed_url": "https://aws.amazon.com/blogs/big-data/category/analytics/amazon-opensearch-service/feed/",
+      "saved": 10,
+      "title": "Amazon OpenSearch Service \u2013 AWS Big Data Blog"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:21:40Z"
+}
