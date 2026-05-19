@@ -1,0 +1,231 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amazon OpenSearch Service API — Domains
+  description: 'Amazon OpenSearch Service API — Domains. 5 operations. Lead operation: Amazon OpenSearch Service Create an
+    OpenSearch Domain. Self-contained Naftiko capability covering one Amazon Opensearch Service business surface.'
+  tags:
+  - Amazon Opensearch Service
+  - Domains
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMAZON_OPENSEARCH_SERVICE_API_KEY: AMAZON_OPENSEARCH_SERVICE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: amazon-opensearch-service-domains
+    baseUri: https://es.{region}.amazonaws.com
+    description: Amazon OpenSearch Service API — Domains business capability. Self-contained, no shared references.
+    resources:
+    - name: 2021-01-01-opensearch-domain
+      path: /2021-01-01/opensearch/domain
+      operations:
+      - name: createdomain
+        method: POST
+        description: Amazon OpenSearch Service Create an OpenSearch Domain
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: 2021-01-01-opensearch-domain-info
+      path: /2021-01-01/opensearch/domain-info
+      operations:
+      - name: describedomains
+        method: POST
+        description: Amazon OpenSearch Service Describe Multiple OpenSearch Domains
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: 2021-01-01-opensearch-domain-domainName
+      path: /2021-01-01/opensearch/domain/{domainName}
+      operations:
+      - name: describedomain
+        method: GET
+        description: Amazon OpenSearch Service Describe an OpenSearch Domain
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: domainName
+          in: path
+          type: string
+          required: true
+      - name: deletedomain
+        method: DELETE
+        description: Amazon OpenSearch Service Delete an OpenSearch Domain
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: domainName
+          in: path
+          type: string
+          required: true
+    - name: 2021-01-01-opensearch-domains
+      path: /2021-01-01/opensearch/domains
+      operations:
+      - name: listdomainnames
+        method: GET
+        description: Amazon OpenSearch Service List All OpenSearch Domains
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.AMAZON_OPENSEARCH_SERVICE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: amazon-opensearch-service-domains-rest
+    port: 8080
+    description: REST adapter for Amazon OpenSearch Service API — Domains. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/2021-01-01/opensearch/domain
+      name: 2021-01-01-opensearch-domain
+      description: REST surface for 2021-01-01-opensearch-domain.
+      operations:
+      - method: POST
+        name: createdomain
+        description: Amazon OpenSearch Service Create an OpenSearch Domain
+        call: amazon-opensearch-service-domains.createdomain
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/2021-01-01/opensearch/domain-info
+      name: 2021-01-01-opensearch-domain-info
+      description: REST surface for 2021-01-01-opensearch-domain-info.
+      operations:
+      - method: POST
+        name: describedomains
+        description: Amazon OpenSearch Service Describe Multiple OpenSearch Domains
+        call: amazon-opensearch-service-domains.describedomains
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/2021-01-01/opensearch/domain/{domainname}
+      name: 2021-01-01-opensearch-domain-domainname
+      description: REST surface for 2021-01-01-opensearch-domain-domainName.
+      operations:
+      - method: GET
+        name: describedomain
+        description: Amazon OpenSearch Service Describe an OpenSearch Domain
+        call: amazon-opensearch-service-domains.describedomain
+        with:
+          domainName: rest.domainName
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletedomain
+        description: Amazon OpenSearch Service Delete an OpenSearch Domain
+        call: amazon-opensearch-service-domains.deletedomain
+        with:
+          domainName: rest.domainName
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/2021-01-01/opensearch/domains
+      name: 2021-01-01-opensearch-domains
+      description: REST surface for 2021-01-01-opensearch-domains.
+      operations:
+      - method: GET
+        name: listdomainnames
+        description: Amazon OpenSearch Service List All OpenSearch Domains
+        call: amazon-opensearch-service-domains.listdomainnames
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: amazon-opensearch-service-domains-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amazon OpenSearch Service API — Domains. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: amazon-opensearch-service-create-opensearch
+      description: Amazon OpenSearch Service Create an OpenSearch Domain
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: amazon-opensearch-service-domains.createdomain
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-opensearch-service-describe-multiple
+      description: Amazon OpenSearch Service Describe Multiple OpenSearch Domains
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: amazon-opensearch-service-domains.describedomains
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-opensearch-service-describe-opensearch
+      description: Amazon OpenSearch Service Describe an OpenSearch Domain
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-opensearch-service-domains.describedomain
+      with:
+        domainName: tools.domainName
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-opensearch-service-delete-opensearch
+      description: Amazon OpenSearch Service Delete an OpenSearch Domain
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: amazon-opensearch-service-domains.deletedomain
+      with:
+        domainName: tools.domainName
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: amazon-opensearch-service-list-all
+      description: Amazon OpenSearch Service List All OpenSearch Domains
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-opensearch-service-domains.listdomainnames
+      outputParameters:
+      - type: object
+        mapping: $.
