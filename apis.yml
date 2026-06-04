@@ -55,6 +55,27 @@ apis:
   - type: NaftikoCapability
     url: capabilities/amazon-opensearch-service-domains.yaml
 common:
+- type: ArazzoWorkflows
+  url: arazzo/
+  workflows:
+  - url: arazzo/amazon-opensearch-service-audit-domain-readiness-workflow.yml
+    name: Amazon OpenSearch Service Audit Domain Fleet Readiness
+    summary: Enumerate domains, bulk-describe them, and drill into a single target domain's status.
+  - url: arazzo/amazon-opensearch-service-clone-domain-engine-version-workflow.yml
+    name: Amazon OpenSearch Service Clone a Domain Engine Version
+    summary: Read a source domain's engine version and create a new domain that matches it.
+  - url: arazzo/amazon-opensearch-service-decommission-domain-workflow.yml
+    name: Amazon OpenSearch Service Decommission a Domain
+    summary: Confirm a domain exists, delete it, and poll until the deletion completes.
+  - url: arazzo/amazon-opensearch-service-ensure-domain-exists-workflow.yml
+    name: Amazon OpenSearch Service Ensure Domain Exists
+    summary: Create a domain only when it is not already present in the account.
+  - url: arazzo/amazon-opensearch-service-inventory-domains-workflow.yml
+    name: Amazon OpenSearch Service Inventory All Domains
+    summary: List every domain name in the account and fetch full configuration details for all of them.
+  - url: arazzo/amazon-opensearch-service-provision-domain-workflow.yml
+    name: Amazon OpenSearch Service Provision Domain and Confirm Endpoint
+    summary: Create an OpenSearch domain and poll its status until the search endpoint is live.
 - type: Blog
   url: https://aws.amazon.com/blogs/big-data/category/analytics/amazon-opensearch-service/
 - type: Support

@@ -1,0 +1,88 @@
+arazzo: 1.0.1
+info:
+  title: Amazon OpenSearch Service Decommission a Domain
+  summary: Confirm a domain exists, delete it, and poll until the deletion completes.
+  description: >-
+    Safely tears down a managed OpenSearch domain. The workflow first describes
+    the target domain to confirm it exists and to capture its ARN for the audit
+    record, then issues the DeleteDomain request, and finally polls DescribeDomain
+    until the service reports the domain as deleted. Each step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: openSearchServiceApi
+  url: ../openapi/amazon-opensearch-service-openapi.yml
+  type: openapi
+workflows:
+- workflowId: decommission-domain
+  summary: Verify, delete, and confirm removal of a domain.
+  description: >-
+    Describes the domain to capture its identity, deletes it, and polls
+    DescribeDomain until the domain reports that deletion is complete.
+  inputs:
+    type: object
+    required:
+    - domainName
+    properties:
+      domainName:
+        type: string
+        description: Name of the OpenSearch domain to decommission.
+  steps:
+  - stepId: confirmDomain
+    description: >-
+      Describe the domain to confirm it exists and capture its ARN and id for
+      the deletion audit record.
+    operationId: DescribeDomain
+    parameters:
+    - name: domainName
+      in: path
+      value: $inputs.domainName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      domainId: $response.body#/DomainId
+      arn: $response.body#/ARN
+  - stepId: deleteDomain
+    description: >-
+      Issue the DeleteDomain request to permanently remove the domain and all of
+      its data.
+    operationId: DeleteDomain
+    parameters:
+    - name: domainName
+      in: path
+      value: $inputs.domainName
+    successCriteria:
+    - condition: $statusCode == 200
+  - stepId: pollDeletion
+    description: >-
+      Describe the domain and check whether deletion has completed. While the
+      domain still reports that it is not yet deleted the step loops back to
+      describe it again.
+    operationId: DescribeDomain
+    parameters:
+    - name: domainName
+      in: path
+      value: $inputs.domainName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      deleted: $response.body#/Deleted
+    onSuccess:
+    - name: deletionComplete
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.Deleted == true
+        type: jsonpath
+    - name: stillDeleting
+      type: goto
+      stepId: pollDeletion
+      criteria:
+      - context: $response.body
+        condition: $.Deleted != true
+        type: jsonpath
+  outputs:
+    domainId: $steps.confirmDomain.outputs.domainId
+    arn: $steps.confirmDomain.outputs.arn
+    deleted: $steps.pollDeletion.outputs.deleted

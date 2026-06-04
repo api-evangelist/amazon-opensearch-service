@@ -1,0 +1,57 @@
+arazzo: 1.0.1
+info:
+  title: Amazon OpenSearch Service Inventory All Domains
+  summary: List every domain name in the account and fetch full configuration details for all of them.
+  description: >-
+    Builds a complete inventory of the OpenSearch domains in the account. The
+    workflow first lists all domain names owned by the caller, then submits a
+    single bulk DescribeDomains request to retrieve the configuration detail for
+    that set of domains in one call. Each step spells out its request inline so
+    the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: openSearchServiceApi
+  url: ../openapi/amazon-opensearch-service-openapi.yml
+  type: openapi
+workflows:
+- workflowId: inventory-domains
+  summary: List all domain names and bulk-describe them.
+  description: >-
+    Retrieves the full set of domain names in the account and then fetches their
+    configuration details with a single bulk DescribeDomains call.
+  inputs:
+    type: object
+    properties:
+      domainNames:
+        type: array
+        description: >-
+          Optional explicit list of domain names to describe. When omitted the
+          workflow describes the names returned by ListDomainNames.
+        items:
+          type: string
+  steps:
+  - stepId: listDomains
+    description: >-
+      List the names of all OpenSearch domains owned by the current account.
+    operationId: ListDomainNames
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      domainNames: $response.body#/DomainNames
+  - stepId: describeDomains
+    description: >-
+      Submit a single bulk DescribeDomains request for the supplied or
+      discovered list of domain names to retrieve their configuration details.
+    operationId: DescribeDomains
+    requestBody:
+      contentType: application/json
+      payload:
+        DomainNames: $inputs.domainNames
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      domainStatusList: $response.body#/DomainStatusList
+  outputs:
+    domainNames: $steps.listDomains.outputs.domainNames
+    domainStatusList: $steps.describeDomains.outputs.domainStatusList

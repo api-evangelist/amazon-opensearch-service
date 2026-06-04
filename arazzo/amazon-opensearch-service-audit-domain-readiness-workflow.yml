@@ -1,0 +1,93 @@
+arazzo: 1.0.1
+info:
+  title: Amazon OpenSearch Service Audit Domain Fleet Readiness
+  summary: Enumerate domains, bulk-describe them, and drill into a single target domain's status.
+  description: >-
+    Produces a readiness audit across the account's OpenSearch domains. The
+    workflow lists every domain name, bulk-describes the full set to capture
+    engine versions and endpoints, and then drills into one specific target
+    domain to confirm it has finished provisioning and published an endpoint.
+    Each step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: openSearchServiceApi
+  url: ../openapi/amazon-opensearch-service-openapi.yml
+  type: openapi
+workflows:
+- workflowId: audit-domain-readiness
+  summary: List, bulk-describe, and verify one domain's readiness.
+  description: >-
+    Lists all domains, bulk-describes them for a fleet snapshot, then describes a
+    single target domain and branches on whether it is fully ready.
+  inputs:
+    type: object
+    required:
+    - targetDomainName
+    properties:
+      targetDomainName:
+        type: string
+        description: The specific domain to verify readiness for after the fleet snapshot.
+      domainNames:
+        type: array
+        description: >-
+          Optional explicit list of domain names for the bulk describe. When
+          omitted the names discovered by ListDomainNames are used.
+        items:
+          type: string
+  steps:
+  - stepId: listDomains
+    description: >-
+      List the names of all OpenSearch domains owned by the current account.
+    operationId: ListDomainNames
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      domainNames: $response.body#/DomainNames
+  - stepId: snapshotFleet
+    description: >-
+      Bulk-describe the discovered or supplied set of domains to capture a
+      single fleet-wide configuration snapshot.
+    operationId: DescribeDomains
+    requestBody:
+      contentType: application/json
+      payload:
+        DomainNames: $inputs.domainNames
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      domainStatusList: $response.body#/DomainStatusList
+  - stepId: verifyTarget
+    description: >-
+      Describe the specific target domain and branch on whether it has finished
+      provisioning with a published endpoint.
+    operationId: DescribeDomain
+    parameters:
+    - name: domainName
+      in: path
+      value: $inputs.targetDomainName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      created: $response.body#/Created
+      endpoint: $response.body#/Endpoint
+      engineVersion: $response.body#/EngineVersion
+    onSuccess:
+    - name: targetReady
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.Created == true && $.Endpoint != null
+        type: jsonpath
+    - name: targetNotReady
+      type: goto
+      stepId: verifyTarget
+      criteria:
+      - context: $response.body
+        condition: $.Endpoint == null
+        type: jsonpath
+  outputs:
+    domainNames: $steps.listDomains.outputs.domainNames
+    domainStatusList: $steps.snapshotFleet.outputs.domainStatusList
+    targetEndpoint: $steps.verifyTarget.outputs.endpoint
+    targetEngineVersion: $steps.verifyTarget.outputs.engineVersion

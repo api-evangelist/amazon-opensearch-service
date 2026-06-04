@@ -1,0 +1,100 @@
+arazzo: 1.0.1
+info:
+  title: Amazon OpenSearch Service Provision Domain and Confirm Endpoint
+  summary: Create an OpenSearch domain and poll its status until the search endpoint is live.
+  description: >-
+    Provisions a new managed OpenSearch domain and then waits for it to finish
+    coming online. The workflow submits a CreateDomain request with the supplied
+    engine version and cluster configuration, then repeatedly describes the
+    domain until the service reports that the domain has been created and a
+    search endpoint has been published. Each step spells out its request inline
+    so the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: openSearchServiceApi
+  url: ../openapi/amazon-opensearch-service-openapi.yml
+  type: openapi
+workflows:
+- workflowId: provision-domain
+  summary: Create a domain and wait until its endpoint is available.
+  description: >-
+    Submits a CreateDomain request and polls DescribeDomain until the domain is
+    reported as created with a populated endpoint, returning the domain
+    identifier, ARN, and endpoint.
+  inputs:
+    type: object
+    required:
+    - domainName
+    properties:
+      domainName:
+        type: string
+        description: Name of the OpenSearch domain to create.
+      engineVersion:
+        type: string
+        description: OpenSearch or Elasticsearch engine version (e.g. OpenSearch_2.11).
+      clusterConfig:
+        type: object
+        description: Container for the cluster configuration (instance types and counts).
+      ebsOptions:
+        type: object
+        description: Container for EBS-based storage options.
+      accessPolicies:
+        type: string
+        description: IAM access policy as a JSON-formatted string.
+  steps:
+  - stepId: createDomain
+    description: >-
+      Submit the CreateDomain request with the supplied engine version, cluster
+      configuration, EBS options, and access policy.
+    operationId: CreateDomain
+    requestBody:
+      contentType: application/json
+      payload:
+        DomainName: $inputs.domainName
+        EngineVersion: $inputs.engineVersion
+        ClusterConfig: $inputs.clusterConfig
+        EBSOptions: $inputs.ebsOptions
+        AccessPolicies: $inputs.accessPolicies
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      domainId: $response.body#/DomainId
+      domainName: $response.body#/DomainName
+      arn: $response.body#/ARN
+  - stepId: pollDomain
+    description: >-
+      Describe the domain and check whether it has finished being created and
+      published a search endpoint. While the endpoint is still empty the step
+      loops back to describe the domain again.
+    operationId: DescribeDomain
+    parameters:
+    - name: domainName
+      in: path
+      value: $steps.createDomain.outputs.domainName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      created: $response.body#/Created
+      endpoint: $response.body#/Endpoint
+      engineVersion: $response.body#/EngineVersion
+      arn: $response.body#/ARN
+    onSuccess:
+    - name: endpointReady
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.Created == true && $.Endpoint != null
+        type: jsonpath
+    - name: stillProvisioning
+      type: goto
+      stepId: pollDomain
+      criteria:
+      - context: $response.body
+        condition: $.Endpoint == null
+        type: jsonpath
+  outputs:
+    domainId: $steps.createDomain.outputs.domainId
+    arn: $steps.pollDomain.outputs.arn
+    endpoint: $steps.pollDomain.outputs.endpoint
+    engineVersion: $steps.pollDomain.outputs.engineVersion

@@ -1,0 +1,106 @@
+arazzo: 1.0.1
+info:
+  title: Amazon OpenSearch Service Clone a Domain Engine Version
+  summary: Read a source domain's engine version and create a new domain that matches it.
+  description: >-
+    Stands up a replacement or parallel domain that mirrors an existing one. The
+    workflow describes a source domain to capture its engine version, then
+    creates a new domain pinned to that same engine version with a caller
+    supplied cluster configuration, and finally polls the new domain until its
+    endpoint is published. Because the underlying API exposes engine version on
+    the domain status, the clone is driven from that field rather than from a
+    full configuration copy. Each step spells out its request inline so the flow
+    can be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: openSearchServiceApi
+  url: ../openapi/amazon-opensearch-service-openapi.yml
+  type: openapi
+workflows:
+- workflowId: clone-domain-engine-version
+  summary: Mirror a source domain's engine version onto a new domain.
+  description: >-
+    Describes the source domain, creates a new domain pinned to the source
+    engine version, and polls the new domain until its endpoint is ready.
+  inputs:
+    type: object
+    required:
+    - sourceDomainName
+    - targetDomainName
+    properties:
+      sourceDomainName:
+        type: string
+        description: Name of the existing domain to read the engine version from.
+      targetDomainName:
+        type: string
+        description: Name of the new domain to create.
+      clusterConfig:
+        type: object
+        description: Container for the new domain's cluster configuration.
+      ebsOptions:
+        type: object
+        description: Container for the new domain's EBS-based storage options.
+  steps:
+  - stepId: describeSource
+    description: >-
+      Describe the source domain to capture the engine version that the new
+      domain should match.
+    operationId: DescribeDomain
+    parameters:
+    - name: domainName
+      in: path
+      value: $inputs.sourceDomainName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      sourceEngineVersion: $response.body#/EngineVersion
+      sourceArn: $response.body#/ARN
+  - stepId: createClone
+    description: >-
+      Create the target domain pinned to the source domain's engine version,
+      using the supplied cluster configuration and EBS options.
+    operationId: CreateDomain
+    requestBody:
+      contentType: application/json
+      payload:
+        DomainName: $inputs.targetDomainName
+        EngineVersion: $steps.describeSource.outputs.sourceEngineVersion
+        ClusterConfig: $inputs.clusterConfig
+        EBSOptions: $inputs.ebsOptions
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      cloneDomainId: $response.body#/DomainId
+      cloneArn: $response.body#/ARN
+  - stepId: pollClone
+    description: >-
+      Describe the new domain until it reports a published endpoint, looping
+      while the endpoint remains empty.
+    operationId: DescribeDomain
+    parameters:
+    - name: domainName
+      in: path
+      value: $inputs.targetDomainName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      endpoint: $response.body#/Endpoint
+      engineVersion: $response.body#/EngineVersion
+    onSuccess:
+    - name: cloneReady
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.Created == true && $.Endpoint != null
+        type: jsonpath
+    - name: cloneWaiting
+      type: goto
+      stepId: pollClone
+      criteria:
+      - context: $response.body
+        condition: $.Endpoint == null
+        type: jsonpath
+  outputs:
+    sourceEngineVersion: $steps.describeSource.outputs.sourceEngineVersion
+    cloneDomainId: $steps.createClone.outputs.cloneDomainId
+    cloneEndpoint: $steps.pollClone.outputs.endpoint
