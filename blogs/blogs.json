@@ -4,10 +4,11 @@
     {
       "source": "https://aws.amazon.com/blogs/big-data/category/analytics/amazon-opensearch-service/",
       "feed_url": "https://aws.amazon.com/blogs/big-data/category/analytics/amazon-opensearch-service/feed/",
-      "title": "Amazon OpenSearch Service \u2013 AWS Big Data Blog",
-      "saved": 0
+      "title": "Amazon OpenSearch Service – AWS Big Data Blog",
+      "saved": 0,
+      "method": "feed"
     }
   ],
   "post_count": 27,
-  "fetched": "2026-06-01T23:00:37Z"
+  "fetched": "2026-06-07T00:00:00Z"
 }

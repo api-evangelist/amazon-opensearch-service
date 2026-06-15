@@ -1,0 +1,528 @@
+{
+  "info": {
+    "_postman_id": "76c58f6b-2433-4065-86e1-4360e74c20cf",
+    "name": "Amazon OpenSearch Service API",
+    "description": "The Amazon OpenSearch Service API enables programmatic management of OpenSearch domains. You can create, configure, update, and delete domains, manage access policies, configure VPC endpoints, and monitor domain health through this management interface.\n\nContact Support:\n Name: AWS Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:04:38.000Z",
+    "updatedAt": "2026-06-05T15:04:39.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-76c58f6b-2433-4065-86e1-4360e74c20cf"
+  },
+  "item": [
+    {
+      "name": "2021-01-01",
+      "item": [
+        {
+          "name": "opensearch",
+          "item": [
+            {
+              "name": "domain",
+              "item": [
+                {
+                  "name": "{domainName}",
+                  "item": [
+                    {
+                      "name": "Amazon OpenSearch Service Describe an OpenSearch Domain",
+                      "id": "f15436b8-fc02-4a1c-b3b0-bcea30a64858",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/2021-01-01/opensearch/domain/:domainName",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "2021-01-01",
+                            "opensearch",
+                            "domain",
+                            ":domainName"
+                          ],
+                          "variable": [
+                            {
+                              "id": "caca91a0-9e10-4a1c-9b6e-6249eff53779",
+                              "key": "domainName",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Returns domain configuration details for the specified domain."
+                      },
+                      "response": [
+                        {
+                          "id": "89112ddd-139c-47c3-82b6-963a5c89250b",
+                          "name": "Domain details retrieved successfully",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/2021-01-01/opensearch/domain/:domainName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "2021-01-01",
+                                "opensearch",
+                                "domain",
+                                ":domainName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "domainName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"DomainId\": \"<string>\",\n  \"DomainName\": \"<string>\",\n  \"ARN\": \"<string>\",\n  \"Created\": \"<boolean>\",\n  \"Deleted\": \"<boolean>\",\n  \"Endpoint\": \"<string>\",\n  \"EngineVersion\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T15:04:39.000Z",
+                          "updatedAt": "2026-06-05T15:04:39.000Z",
+                          "uid": "35240-89112ddd-139c-47c3-82b6-963a5c89250b"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:04:39.000Z",
+                      "updatedAt": "2026-06-05T15:04:39.000Z",
+                      "uid": "35240-f15436b8-fc02-4a1c-b3b0-bcea30a64858"
+                    },
+                    {
+                      "name": "Amazon OpenSearch Service Delete an OpenSearch Domain",
+                      "id": "2800629f-25a0-4dd1-8b19-2d5148426ce6",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/2021-01-01/opensearch/domain/:domainName",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "2021-01-01",
+                            "opensearch",
+                            "domain",
+                            ":domainName"
+                          ],
+                          "variable": [
+                            {
+                              "id": "5190eb0d-926f-48e9-937f-a492c846ce55",
+                              "key": "domainName",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Permanently deletes the specified domain and all of its data."
+                      },
+                      "response": [
+                        {
+                          "id": "5b5e7ec5-70a1-4f4d-8935-b4420005198e",
+                          "name": "Domain deletion initiated successfully",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/2021-01-01/opensearch/domain/:domainName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "2021-01-01",
+                                "opensearch",
+                                "domain",
+                                ":domainName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "domainName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-06-05T15:04:39.000Z",
+                          "updatedAt": "2026-06-05T15:04:39.000Z",
+                          "uid": "35240-5b5e7ec5-70a1-4f4d-8935-b4420005198e"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:04:39.000Z",
+                      "updatedAt": "2026-06-05T15:04:39.000Z",
+                      "uid": "35240-2800629f-25a0-4dd1-8b19-2d5148426ce6"
+                    }
+                  ],
+                  "id": "b2a18690-9ca1-42c6-9108-b6d3721c4771",
+                  "createdAt": "2026-06-05T15:04:39.000Z",
+                  "updatedAt": "2026-06-05T15:04:39.000Z",
+                  "uid": "35240-b2a18690-9ca1-42c6-9108-b6d3721c4771"
+                },
+                {
+                  "name": "Amazon OpenSearch Service Create an OpenSearch Domain",
+                  "id": "58676afd-aa08-4aed-8602-f29261cef8a9",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"DomainName\": \"<string>\",\n  \"EngineVersion\": \"<string>\",\n  \"ClusterConfig\": {},\n  \"EBSOptions\": {},\n  \"AccessPolicies\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/2021-01-01/opensearch/domain",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "2021-01-01",
+                        "opensearch",
+                        "domain"
+                      ]
+                    },
+                    "description": "Creates an Amazon OpenSearch Service domain with the specified configuration."
+                  },
+                  "response": [
+                    {
+                      "id": "2755a8d2-a2d3-4066-bd60-09ec3722e349",
+                      "name": "Domain creation initiated successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"DomainName\": \"<string>\",\n  \"EngineVersion\": \"<string>\",\n  \"ClusterConfig\": {},\n  \"EBSOptions\": {},\n  \"AccessPolicies\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/2021-01-01/opensearch/domain",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "2021-01-01",
+                            "opensearch",
+                            "domain"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"DomainId\": \"<string>\",\n  \"DomainName\": \"<string>\",\n  \"ARN\": \"<string>\",\n  \"Created\": \"<boolean>\",\n  \"Deleted\": \"<boolean>\",\n  \"Endpoint\": \"<string>\",\n  \"EngineVersion\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:04:39.000Z",
+                      "updatedAt": "2026-06-05T15:04:39.000Z",
+                      "uid": "35240-2755a8d2-a2d3-4066-bd60-09ec3722e349"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:04:39.000Z",
+                  "updatedAt": "2026-06-05T15:04:39.000Z",
+                  "uid": "35240-58676afd-aa08-4aed-8602-f29261cef8a9"
+                }
+              ],
+              "id": "6b253447-5d7e-4f62-bd65-361f9b08251d",
+              "createdAt": "2026-06-05T15:04:39.000Z",
+              "updatedAt": "2026-06-05T15:04:39.000Z",
+              "uid": "35240-6b253447-5d7e-4f62-bd65-361f9b08251d"
+            },
+            {
+              "name": "domain-info",
+              "item": [
+                {
+                  "name": "Amazon OpenSearch Service Describe Multiple OpenSearch Domains",
+                  "id": "0b46118a-d7eb-4fa2-8b7f-b5df904f3466",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"DomainNames\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/2021-01-01/opensearch/domain-info",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "2021-01-01",
+                        "opensearch",
+                        "domain-info"
+                      ]
+                    },
+                    "description": "Returns domain configuration details for the specified list of domains."
+                  },
+                  "response": [
+                    {
+                      "id": "d684b59c-5cb7-4eb1-9556-7420fb2caf84",
+                      "name": "Domain details retrieved successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"DomainNames\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/2021-01-01/opensearch/domain-info",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "2021-01-01",
+                            "opensearch",
+                            "domain-info"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:04:39.000Z",
+                      "updatedAt": "2026-06-05T15:04:39.000Z",
+                      "uid": "35240-d684b59c-5cb7-4eb1-9556-7420fb2caf84"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:04:39.000Z",
+                  "updatedAt": "2026-06-05T15:04:39.000Z",
+                  "uid": "35240-0b46118a-d7eb-4fa2-8b7f-b5df904f3466"
+                }
+              ],
+              "id": "db6ca981-b8e1-4b31-a503-dc943a155ca8",
+              "createdAt": "2026-06-05T15:04:39.000Z",
+              "updatedAt": "2026-06-05T15:04:39.000Z",
+              "uid": "35240-db6ca981-b8e1-4b31-a503-dc943a155ca8"
+            },
+            {
+              "name": "domains",
+              "item": [
+                {
+                  "name": "Amazon OpenSearch Service List All OpenSearch Domains",
+                  "id": "8c5f337c-edb1-46e4-9c6b-53a7c8c47bcb",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/2021-01-01/opensearch/domains",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "2021-01-01",
+                        "opensearch",
+                        "domains"
+                      ]
+                    },
+                    "description": "Returns the names of all OpenSearch domains owned by the current user."
+                  },
+                  "response": [
+                    {
+                      "id": "22d73fc7-fd87-4c80-b003-8492eb9a0863",
+                      "name": "Domain names listed successfully",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/2021-01-01/opensearch/domains",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "2021-01-01",
+                            "opensearch",
+                            "domains"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-06-05T15:04:39.000Z",
+                      "updatedAt": "2026-06-05T15:04:39.000Z",
+                      "uid": "35240-22d73fc7-fd87-4c80-b003-8492eb9a0863"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:04:39.000Z",
+                  "updatedAt": "2026-06-05T15:04:39.000Z",
+                  "uid": "35240-8c5f337c-edb1-46e4-9c6b-53a7c8c47bcb"
+                }
+              ],
+              "id": "2ee9363c-fa21-4f93-90f7-7ee52aa98c90",
+              "createdAt": "2026-06-05T15:04:39.000Z",
+              "updatedAt": "2026-06-05T15:04:39.000Z",
+              "uid": "35240-2ee9363c-fa21-4f93-90f7-7ee52aa98c90"
+            }
+          ],
+          "id": "974bc4ef-c060-42f0-8cc6-1b38eaf18be5",
+          "createdAt": "2026-06-05T15:04:39.000Z",
+          "updatedAt": "2026-06-05T15:04:39.000Z",
+          "uid": "35240-974bc4ef-c060-42f0-8cc6-1b38eaf18be5"
+        }
+      ],
+      "id": "ec973a49-33b0-4313-a95e-d4d0bc6ee4e3",
+      "createdAt": "2026-06-05T15:04:39.000Z",
+      "updatedAt": "2026-06-05T15:04:39.000Z",
+      "uid": "35240-ec973a49-33b0-4313-a95e-d4d0bc6ee4e3"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "region",
+      "value": "us-east-1"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://es.{{region}}.amazonaws.com"
+    }
+  ]
+}
