@@ -36,7 +36,7 @@ apis:
         url: openapi/amazon-opensearch-service-openapi.yml
       - type: OpenAPI
         url: openapi/amazon-opensearch-service-openapi.yml
-      - type: JSON Schema
+      - type: JSONSchema
         url: json-schema/amazon-opensearch-service-schema.json
       - type: JSONLD
         url: json-ld/amazon-opensearch-service-context.jsonld
@@ -52,32 +52,29 @@ apis:
         url: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/what-is.html
       - type: APIReference
         url: https://docs.aws.amazon.com/opensearch-service/latest/APIReference/Welcome.html
-      - type: Quotas
+      - type: RateLimits
         url: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/limits.html
 common:
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/amazon-opensearch-service/overview
-  - type: ArazzoWorkflows
-    url: arazzo/
-    workflows:
-      - url: arazzo/amazon-opensearch-service-audit-domain-readiness-workflow.yml
-        name: Amazon OpenSearch Service Audit Domain Fleet Readiness
-        summary: Enumerate domains, bulk-describe them, and drill into a single target domain's status.
-      - url: arazzo/amazon-opensearch-service-clone-domain-engine-version-workflow.yml
-        name: Amazon OpenSearch Service Clone a Domain Engine Version
-        summary: Read a source domain's engine version and create a new domain that matches it.
-      - url: arazzo/amazon-opensearch-service-decommission-domain-workflow.yml
-        name: Amazon OpenSearch Service Decommission a Domain
-        summary: Confirm a domain exists, delete it, and poll until the deletion completes.
-      - url: arazzo/amazon-opensearch-service-ensure-domain-exists-workflow.yml
-        name: Amazon OpenSearch Service Ensure Domain Exists
-        summary: Create a domain only when it is not already present in the account.
-      - url: arazzo/amazon-opensearch-service-inventory-domains-workflow.yml
-        name: Amazon OpenSearch Service Inventory All Domains
-        summary: List every domain name in the account and fetch full configuration details for all of them.
-      - url: arazzo/amazon-opensearch-service-provision-domain-workflow.yml
-        name: Amazon OpenSearch Service Provision Domain and Confirm Endpoint
-        summary: Create an OpenSearch domain and poll its status until the search endpoint is live.
+  - type: Arazzo
+    url: arazzo/amazon-opensearch-service-audit-domain-readiness-workflow.yml
+    name: Amazon OpenSearch Service Audit Domain Fleet Readiness
+  - type: Arazzo
+    url: arazzo/amazon-opensearch-service-clone-domain-engine-version-workflow.yml
+    name: Amazon OpenSearch Service Clone a Domain Engine Version
+  - type: Arazzo
+    url: arazzo/amazon-opensearch-service-decommission-domain-workflow.yml
+    name: Amazon OpenSearch Service Decommission a Domain
+  - type: Arazzo
+    url: arazzo/amazon-opensearch-service-ensure-domain-exists-workflow.yml
+    name: Amazon OpenSearch Service Ensure Domain Exists
+  - type: Arazzo
+    url: arazzo/amazon-opensearch-service-inventory-domains-workflow.yml
+    name: Amazon OpenSearch Service Inventory All Domains
+  - type: Arazzo
+    url: arazzo/amazon-opensearch-service-provision-domain-workflow.yml
+    name: Amazon OpenSearch Service Provision Domain and Confirm Endpoint
   - type: Blog
     url: https://aws.amazon.com/blogs/big-data/category/analytics/amazon-opensearch-service/
   - type: Support
@@ -86,7 +83,7 @@ common:
     url: https://console.aws.amazon.com/aos/home
   - type: CLI Reference
     url: https://docs.aws.amazon.com/cli/latest/reference/opensearch/
-  - type: SDK
+  - type: SDKs
     url: https://aws.amazon.com/tools/
   - type: Service Status
     url: https://status.aws.amazon.com/
@@ -102,11 +99,11 @@ common:
     url: https://aws.amazon.com/opensearch-service/pricing/
   - type: GettingStarted
     url: https://aws.amazon.com/opensearch-service/getting-started/
-  - type: FAQs
+  - type: FAQ
     url: https://aws.amazon.com/opensearch-service/faqs/
   - type: PrivacyPolicy
     url: https://aws.amazon.com/privacy/
-  - type: SignUp
+  - type: Signup
     url: https://portal.aws.amazon.com/billing/signup
   - type: GitHubOrganization
     url: https://github.com/aws
