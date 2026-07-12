@@ -55,6 +55,14 @@ apis:
       - type: RateLimits
         url: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/limits.html
 common:
+  - type: TrustCenter
+    url: security/amazon-opensearch-service-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/amazon-opensearch-service-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/amazon-opensearch-service-domain-security.yml
+  - type: Authentication
+    url: authentication/amazon-opensearch-service-authentication.yml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/amazon-opensearch-service/overview
   - type: Arazzo
