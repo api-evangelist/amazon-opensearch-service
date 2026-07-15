@@ -55,6 +55,8 @@ apis:
       - type: RateLimits
         url: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/limits.html
 common:
+  - type: AgenticAccess
+    url: agentic-access/amazon-opensearch-service-agentic-access.yml
   - type: TrustCenter
     url: security/amazon-opensearch-service-trust-center.yml
   - type: VulnerabilityDisclosure
