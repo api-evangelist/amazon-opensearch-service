@@ -1,11 +1,7 @@
 openapi: 3.1.0
 info:
-  title: Amazon OpenSearch Service API
-  description: >-
-    The Amazon OpenSearch Service API enables programmatic management of
-    OpenSearch domains. You can create, configure, update, and delete
-    domains, manage access policies, configure VPC endpoints, and monitor
-    domain health through this management interface.
+  title: Amazon OpenSearch Service Domains API
+  description: The Amazon OpenSearch Service API enables programmatic management of OpenSearch domains. You can create, configure, update, and delete domains, manage access policies, configure VPC endpoints, and monitor domain health through this management interface.
   version: '2021-01-01'
   contact:
     name: AWS Support
@@ -170,12 +166,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  securitySchemes:
-    sigv4:
-      type: apiKey
-      name: Authorization
-      in: header
-      description: AWS Signature Version 4
   schemas:
     CreateDomainRequest:
       type: object
@@ -214,3 +204,9 @@ components:
           type: string
         EngineVersion:
           type: string
+  securitySchemes:
+    sigv4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4
