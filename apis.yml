@@ -4,6 +4,19 @@ description: >-
   for log analytics, full-text search, application monitoring, and more.
 url: https://aws.amazon.com/opensearch-service/
 type: Index
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
 tags:
   - Analytics
@@ -16,44 +29,36 @@ tags:
 created: '2024-01-15'
 modified: '2026-05-19'
 apis:
-  - name: Amazon OpenSearch Service API
-    description: >-
-      The Amazon OpenSearch Service API enables you to create, configure, and manage OpenSearch domains for search and
-      analytics workloads.
-    image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
-    humanURL: https://aws.amazon.com/opensearch-service/
-    baseURL: https://es.amazonaws.com
-    tags:
-      - Analytics
-      - OpenSearch
-      - Search
-    properties:
-      - type: Documentation
-        url: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/what-is.html
-      - type: OpenAPI
-        url: https://docs.aws.amazon.com/opensearch-service/latest/APIReference/Welcome.html
-      - type: OpenAPI
-        url: openapi/amazon-opensearch-service-openapi.yml
-      - type: OpenAPI
-        url: openapi/amazon-opensearch-service-openapi.yml
-      - type: JSONSchema
-        url: json-schema/amazon-opensearch-service-schema.json
-      - type: JSONLD
-        url: json-ld/amazon-opensearch-service-context.jsonld
-      - type: Pricing
-        url: https://aws.amazon.com/opensearch-service/pricing/
-      - type: GettingStarted
-        url: https://aws.amazon.com/opensearch-service/getting-started/
-      - type: FAQ
-        url: https://aws.amazon.com/opensearch-service/faqs/
-      - type: Features
-        url: https://aws.amazon.com/opensearch-service/features/
-      - type: Developer Guide
-        url: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/what-is.html
-      - type: APIReference
-        url: https://docs.aws.amazon.com/opensearch-service/latest/APIReference/Welcome.html
-      - type: RateLimits
-        url: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/limits.html
+- aid: amazon-opensearch-service:amazon-opensearch-service-domains-api
+  name: Amazon OpenSearch Service Domains API
+  description: Operations for creating and managing OpenSearch domains
+  humanURL: https://aws.amazon.com/opensearch-service/
+  baseURL: https://es.amazonaws.com
+  tags:
+  - Domains
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-opensearch-service-domains-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/what-is.html
+  - type: JSONSchema
+    url: json-schema/amazon-opensearch-service-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-opensearch-service-context.jsonld
+  - type: Pricing
+    url: https://aws.amazon.com/opensearch-service/pricing/
+  - type: GettingStarted
+    url: https://aws.amazon.com/opensearch-service/getting-started/
+  - type: FAQ
+    url: https://aws.amazon.com/opensearch-service/faqs/
+  - type: Features
+    url: https://aws.amazon.com/opensearch-service/features/
+  - type: Developer Guide
+    url: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/what-is.html
+  - type: APIReference
+    url: https://docs.aws.amazon.com/opensearch-service/latest/APIReference/Welcome.html
+  - type: RateLimits
+    url: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/limits.html
 common:
   - type: AgenticAccess
     url: agentic-access/amazon-opensearch-service-agentic-access.yml
