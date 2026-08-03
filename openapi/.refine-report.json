@@ -1,0 +1,14 @@
+{
+  "provider": "amazon-opensearch-service",
+  "sources": [
+    "amazon-opensearch-service-domains-api-openapi.yml"
+  ],
+  "outputs": [
+    "amazon-opensearch-service-domains-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
