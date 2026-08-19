@@ -4,6 +4,7 @@ description: >-
   for log analytics, full-text search, application monitoring, and more.
 url: https://aws.amazon.com/opensearch-service/
 type: Index
+specificationVersion: '0.23'
 accessModel:
   pricing: freemium
   onboarding: self-serve
