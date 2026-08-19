@@ -1,0 +1,103 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon OpenSearch Service Domains API",
+    "version": "2021-01-01"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Domains",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Amazon OpenSearch Service Create an OpenSearch Domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://es.{region}.amazonaws.com/2021-01-01/opensearch/domain",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an Amazon OpenSearch Service domain with the specified configuration."
+        },
+        {
+          "info": {
+            "name": "Amazon OpenSearch Service Describe an OpenSearch Domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://es.{region}.amazonaws.com/2021-01-01/opensearch/domain/:domainName",
+            "params": [
+              {
+                "name": "domainName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns domain configuration details for the specified domain."
+        },
+        {
+          "info": {
+            "name": "Amazon OpenSearch Service Delete an OpenSearch Domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://es.{region}.amazonaws.com/2021-01-01/opensearch/domain/:domainName",
+            "params": [
+              {
+                "name": "domainName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Permanently deletes the specified domain and all of its data."
+        },
+        {
+          "info": {
+            "name": "Amazon OpenSearch Service Describe Multiple OpenSearch Domains",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://es.{region}.amazonaws.com/2021-01-01/opensearch/domain-info",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns domain configuration details for the specified list of domains."
+        },
+        {
+          "info": {
+            "name": "Amazon OpenSearch Service List All OpenSearch Domains",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://es.{region}.amazonaws.com/2021-01-01/opensearch/domains"
+          },
+          "docs": "Returns the names of all OpenSearch domains owned by the current user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
