@@ -13,8 +13,8 @@ info:
     can be read and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: openSearchServiceApi
-  url: ../openapi/amazon-opensearch-service-openapi.yml
+- name: domainsApi
+  url: ../openapi/amazon-opensearch-service-domains-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: clone-domain-engine-version
