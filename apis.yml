@@ -172,3 +172,5 @@ maintainers:
     email: kin@apievangelist.com
     url: https://apievangelist.com
 include: []
+x-parent: aws
+x-relationship: product

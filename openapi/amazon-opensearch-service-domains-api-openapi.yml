@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Amazon OpenSearch Service Domains API
   description: The Amazon OpenSearch Service API enables programmatic management of OpenSearch domains. You can create, configure, update, and delete domains, manage access policies, configure VPC endpoints, and monitor domain health through this management interface.
